@@ -21,7 +21,14 @@ public class Calculator1 {
         double monthlyRate = (interestRate / 12) /100;
         double numOfPayments = length * 12.0;
 
-        double monthlyPayment = (principal *(monthlyRate*Math.pow(1 + monthlyRate, numOfPayments))) / (Math.pow((1 + monthlyRate), numOfPayments) - 1);
+
+        // (1 + r)^n
+        double growthFactor = Math.pow(1 + monthlyRate, numOfPayments);
+        // r(1 + r)^n
+        double numerator = monthlyRate * growthFactor;
+        // (1 + r)^n - 1
+        double monthlyPayment = principal * (numerator / (growthFactor - 1));
+
 
 
         double totalInterest = (monthlyPayment * numOfPayments) - principal;
