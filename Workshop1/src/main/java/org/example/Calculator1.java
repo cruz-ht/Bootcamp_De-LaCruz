@@ -26,5 +26,12 @@ public class Calculator1 {
 
         double totalInterest = (monthlyPayment * numOfPayments) - principal;
 
+
+        //FINAL OUTPUT
+        System.out.printf("Your Monthly Payment is: %.2f%n", monthlyPayment);
+        System.out.printf("Total interest Paid: %.2f%n", totalInterest);
+
+
+        scanner.close();
     }
 }
