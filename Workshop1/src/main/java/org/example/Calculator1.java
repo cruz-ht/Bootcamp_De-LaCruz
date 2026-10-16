@@ -6,16 +6,25 @@ public class Calculator1 {
     public static void main(String[] args) {
         Scanner scanner =  new Scanner(System.in);
 
-
+        //USER PROMPT
         System.out.println("What is your Principal Amount? (loan amount)");
-        double Principal = scanner.nextInt();
-
+        double principal = scanner.nextDouble();
 
         System.out.println("What is your Annual Interest Rate?");
-        double interestRate = scanner.nextInt();
+        double interestRate = scanner.nextDouble();
 
         System.out.println("Enter the length of your Payment");
-        double length = scanner.nextInt();
+        double length = scanner.nextDouble();
+
+
+        //CALCULATIONS
+        double monthlyRate = (interestRate / 12) /100;
+        double numOfPayments = length * 12.0;
+
+        double monthlyPayment = (principal *(monthlyRate*Math.pow(1 + monthlyRate, numOfPayments))) / (Math.pow((1 + monthlyRate), numOfPayments) - 1);
+
+
+        double totalInterest = (monthlyPayment * numOfPayments) - principal;
 
     }
 }
