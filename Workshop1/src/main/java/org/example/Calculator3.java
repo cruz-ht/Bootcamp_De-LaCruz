@@ -6,16 +6,18 @@ public class Calculator3 {
     public static void main (String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // USER INPUT
-        System.out.println("Enter the Following");
+        //TITLE
+        System.out.println("━━━━ Annuity Present Value Calculator ━━━━");
+        System.out.println("Please Answer the Following 4 questions to receive your, result!\n");
 
-        System.out.println("Monthly Payout Amount: ");
+        // USER INPUT
+        System.out.println("How Much will the Annuity pay out Each Month: ");
         double monthlyPay = scanner.nextDouble();
 
-        System.out.println("Expected Interest Rate: ");
+        System.out.println("What is the Expected Annual Interest Rate?(e.g. 2.5 for 2.5%) ");
         double interestRate = scanner.nextDouble();
 
-        System.out.println("Number of Years till Pay Out: ");
+        System.out.println("How many years will the annuity pay out?");
         double annuityYears = scanner.nextDouble();
 
 

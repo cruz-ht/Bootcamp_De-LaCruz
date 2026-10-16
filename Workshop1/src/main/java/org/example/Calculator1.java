@@ -6,14 +6,18 @@ public class Calculator1 {
     public static void main(String[] args) {
         Scanner scanner =  new Scanner(System.in);
 
+        //TITLE
+        System.out.println("━━━━  MORTGAGE CALCULATOR  ━━━━");
+        System.out.println("Please Answer the Following 3 questions to receive your, result!\n");
+
         //USER PROMPT
-        System.out.println("What is your Principal Amount? (loan amount)");
+        System.out.println("What is the principal amount of the loan? ");
         double principal = scanner.nextDouble();
 
-        System.out.println("What is your Annual Interest Rate?");
+        System.out.println("What is the annual interest rate? ");
         double interestRate = scanner.nextDouble();
 
-        System.out.println("Enter the length of your Payment");
+        System.out.println("How many years is the loan? ");
         double length = scanner.nextDouble();
 
 
@@ -37,6 +41,7 @@ public class Calculator1 {
         //FINAL OUTPUT
         System.out.printf("Your Monthly Payment is: %.2f%n", monthlyPayment);
         System.out.printf("Total interest Paid: %.2f%n", totalInterest);
+
 
 
         scanner.close();
