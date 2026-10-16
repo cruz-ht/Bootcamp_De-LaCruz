@@ -33,5 +33,6 @@ public class Calculator2 {
         System.out.printf("Total Interest Earned: $%.2f%n", totalInterest);
 
 
+        scanner.close();
     }
 }
