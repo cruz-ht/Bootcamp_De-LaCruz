@@ -35,11 +35,14 @@ public class Main {
 
         int choice = 0;
         while(choice != 3) {
-            System.out.println("\n=== BOOK STORE HOME SCREEN ===\n");
-            System.out.println("1. Show Available Books");
-            System.out.println("2. Show Checked Out Books");
-            System.out.println("3. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("\nWELCOME TO WAN SHI TONG'S LIBRARY ᓀ ᵥ ᓂ\n");
+            System.out.println("Greetings, Seeker of Knowledge.");
+            System.out.println("The Keeper of Ten Thousand things Welcomes You\n");
+            System.out.println("Choose your Path and Discover what Knowledge awaits.\n");
+            System.out.println("⋆☽ (1) Show Available Books");
+            System.out.println("⋆☽ (2) Show Checked Out Books");
+            System.out.println("⋆☽ (3) Depart the Library\n");
+            System.out.print("Your Path: ");
 
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -52,27 +55,27 @@ public class Main {
                     break;
 
                 case 2:
-
+                    checkedOutList(books, scanner);
                     break;
 
                 case 3:
-                    System.out.println("GoodBye, We Hope to See you Again !");
+                    System.out.println("Wan Shi Tong bids you farewell. Return when you seek wisdom again.");
                     System.exit(0);
 
                 default:
-                    System.out.println("Invalid Choice, Please Try Again.");
-
+                    System.out.println("This Path is Unknown, Please Try Again.");
 
             }
         }
     }
 
 
-    //METHODS REGUARDING THE ARRAY
 
+    //METHODS OUTSIDE OF BOOK CLASS AKA CASE1 AND 2.
     public static void showAvailableBooks(Book[] books, Scanner scanner){
         //LIST
-        System.out.println("\n=== AVAILABLE BOOKS ===\n");
+        System.out.println("\nTHESE BOOKS AWAIT A WORTHY READER");
+        System.out.println("⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔\n");
         for(int i = 0; i < books.length; i++){
 
             if (books[i].isCheckedOut() == false) {
@@ -83,7 +86,7 @@ public class Main {
             }
         }
         //FOLLOW UP Q, OPTIONAL CHECKOUT OR RETURN
-        System.out.println("Please Enter the ID of the Book you'd like to Checkout. Otherwise enter 0 to Return back to Home Menu");
+        System.out.println("What Knowledge do you Seek? Enter the ID of The Book you Wish to Borrow,\n or Enter (0) to Return to the Library Entrance.");
 
         int checkOutId = scanner.nextInt();
         scanner.nextLine();
@@ -92,30 +95,39 @@ public class Main {
             boolean found = false;
 
             for (int i = 0; i < books.length; i++) {
-
-
+                //IF THE ID IS A MATCH
                 if(books[i].getId() == checkOutId) {
                     found = true;
-
+                    //Continue with asking for users info and logging it while sending an output to user
                     if(books[i].isCheckedOut() == false) {
-                        System.out.println("Please Enter Your Name: ");
+                        System.out.println("Please Provide Your Name for the Library's Borrowing Records: ");
                         String personCheckout = scanner.nextLine();
 
                         books[i].checkOut(personCheckout);
-                        System.out.println("Thank you, " + personCheckout + ". You checked out " + books[i].getTitle());
+                        System.out.println("“Knowledge awaits you, " + personCheckout + ". You have Borrowed: " + books[i].getTitle() + ". Treat this Book with Care.");
                     }
+                    //if by chance they have an id outside of the list, and still enter it, it will return as not available
                     else {
-                        System.out.println("Not Available, Book is Currently Checked Out");
+                        System.out.println("This Book is Already in Another Seeker's Possession. Please Choose Another.");
                     }
-
                 }
             }
+            //invalid input/ user message
             if(found == false) {
-                System.out.println("Book not Found. Please Enter Valid ID");
+                System.out.println("No Record of This Book Exists in the Archives. Please Enter Valid ID");
             }
         }
+    }
+
+    public static void checkedOutList(Book[] books, Scanner scanner){
+        //LIST
+        System.out.println("\nTHESE SCROLLS ARE CURRENTLY IN THE HANDS OF OTHER SEEKERS");
+        System.out.println("⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔\n");
 
 
     }
+
+
+
 
 }
