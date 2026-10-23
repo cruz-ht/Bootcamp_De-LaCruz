@@ -51,4 +51,9 @@ public class Book {
     public void setCheckedOutTo(String checkedOutTo) {
         this.checkedOutTo = checkedOutTo;
     }
+
+
+    //METHODS
+
+
 }
