@@ -31,7 +31,6 @@ public class Main {
         books[18] = new Book(1019, "9780000000196", "Throne of Glass", false, "");
         books[19] = new Book(1020, "9780000000202", "Fourth Wing", true, "Caleb Torres");
 
-        int counter = 20;
 
 
         int choice = 0;
@@ -47,9 +46,9 @@ public class Main {
 
 
             switch(choice) {
-
+                //check methods below Switch statements
                 case 1:
-
+                    showAvailableBooks(books, scanner);
                     break;
 
                 case 2:
@@ -57,16 +56,66 @@ public class Main {
                     break;
 
                 case 3:
-
-                    break;
+                    System.out.println("GoodBye, We Hope to See you Again !");
+                    System.exit(0);
 
                 default:
+                    System.out.println("Invalid Choice, Please Try Again.");
 
 
             }
+        }
+    }
 
+
+    //METHODS REGUARDING THE ARRAY
+
+    public static void showAvailableBooks(Book[] books, Scanner scanner){
+        //LIST
+        System.out.println("\n=== AVAILABLE BOOKS ===\n");
+        for(int i = 0; i < books.length; i++){
+
+            if (books[i].isCheckedOut() == false) {
+                System.out.println("TITLE: " + books[i].getTitle());
+                System.out.println("ID: " + books[i].getId());
+                System.out.println("ISBN: " + books[i].getIsBn());
+                System.out.println("");
+            }
+        }
+        //FOLLOW UP Q, OPTIONAL CHECKOUT OR RETURN
+        System.out.println("Please Enter the ID of the Book you'd like to Checkout. Otherwise enter 0 to Return back to Home Menu");
+
+        int checkOutId = scanner.nextInt();
+        scanner.nextLine();
+
+        if(checkOutId != 0){
+            boolean found = false;
+
+            for (int i = 0; i < books.length; i++) {
+
+
+                if(books[i].getId() == checkOutId) {
+                    found = true;
+
+                    if(books[i].isCheckedOut() == false) {
+                        System.out.println("Please Enter Your Name: ");
+                        String personCheckout = scanner.nextLine();
+
+                        books[i].checkOut(personCheckout);
+                        System.out.println("Thank you, " + personCheckout + ". You checked out " + books[i].getTitle());
+                    }
+                    else {
+                        System.out.println("Not Available, Book is Currently Checked Out");
+                    }
+
+                }
+            }
+            if(found == false) {
+                System.out.println("Book not Found. Please Enter Valid ID");
+            }
         }
 
 
     }
+
 }

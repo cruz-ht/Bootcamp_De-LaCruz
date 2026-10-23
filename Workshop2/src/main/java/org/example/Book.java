@@ -55,5 +55,17 @@ public class Book {
 
     //METHODS
 
+    public void checkOut(String newName) {
+        this.checkedOutTo = newName;
+        this.isCheckedOut = true;
+    }
+
+    public void checkIn() {
+        this.checkedOutTo = "";
+        this.isCheckedOut = false;
+    }
+
+
+
 
 }
