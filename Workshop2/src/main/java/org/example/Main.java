@@ -84,36 +84,28 @@ public class Main {
             }
         }
         //FOLLOW UP Q, OPTIONAL CHECKOUT OR RETURN
-        System.out.println("What Knowledge do you Seek? Enter the ID of The Book you Wish to Borrow,\n or Enter (0) to Return to the Library Entrance.");
+        System.out.println("What Knowledge do you Seek? Enter the ID of The Book you Wish to Borrow,\n or Enter (0) to Return to the Library Entrance: ");
 
         int checkOutId = scanner.nextInt();
         scanner.nextLine();
 
         if (checkOutId != 0) {
-            boolean found = false;
 
             for (int i = 0; i < books.length; i++) {
-                //IF THE ID IS A MATCH
+
                 if (books[i].getId() == checkOutId) {
-                    found = true;
-                    //Continue with asking for users info and logging it while sending an output to user
+
                     if (books[i].isCheckedOut() == false) {
                         System.out.println("Please Provide Your Name for the Library's Borrowing Records: ");
                         String personCheckout = scanner.nextLine();
 
                         books[i].checkOut(personCheckout);
-                        System.out.println("“Knowledge awaits you, " + personCheckout + ". You have Borrowed: " + books[i].getTitle() + ". Treat this Book with Care.");
+                        System.out.println("Knowledge awaits you, " + personCheckout + ". You have Borrowed: " + books[i].getTitle() + ". Treat this Book with Care.");
                     }
-                    //if by chance they have an id outside of the list, and still enter it, it will return as not available
                     else {
                         System.out.println("This Book is Already in Another Seeker's Possession. Please Choose Another.");
                     }
                 }
-            }
-
-            //invalid input/ user message
-            if (found == false) {
-                System.out.println("No Record of This Book Exists in the Archives. Please Enter Valid ID");
             }
         }
     }
@@ -146,7 +138,6 @@ public class Main {
         String checkedOutAnswer= scanner.nextLine();
 
         if (checkedOutAnswer.equals("C")) {
-            boolean matched = false;
             System.out.println("Enter the ID of the Book you Wish to Return to the Library, Seeker: ");
             int returnId = scanner.nextInt();
             scanner.nextLine();
@@ -160,8 +151,6 @@ public class Main {
                     scanner.nextLine();
                 }
             }
-
-
         }
     }
 }
