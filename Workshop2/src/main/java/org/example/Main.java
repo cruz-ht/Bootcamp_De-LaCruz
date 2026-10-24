@@ -32,9 +32,8 @@ public class Main {
         books[19] = new Book(1020, "9780000000202", "Fourth Wing", true, "Caleb Torres");
 
 
-
         int choice = 0;
-        while(choice != 3) {
+        while (choice != 3) {
             System.out.println("\nWELCOME TO WAN SHI TONG'S LIBRARY ᓀ ᵥ ᓂ\n");
             System.out.println("Greetings, Seeker of Knowledge.");
             System.out.println("The Keeper of Ten Thousand things Welcomes You\n");
@@ -48,7 +47,7 @@ public class Main {
             scanner.nextLine();
 
 
-            switch(choice) {
+            switch (choice) {
                 //check methods below Switch statements
                 case 1:
                     showAvailableBooks(books, scanner);
@@ -70,13 +69,12 @@ public class Main {
     }
 
 
-
     //METHODS OUTSIDE OF BOOK CLASS AKA CASE1 AND 2.
-    public static void showAvailableBooks(Book[] books, Scanner scanner){
+    public static void showAvailableBooks(Book[] books, Scanner scanner) {
         //LIST
         System.out.println("\nTHESE BOOKS AWAIT A WORTHY READER");
         System.out.println("⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔\n");
-        for(int i = 0; i < books.length; i++){
+        for (int i = 0; i < books.length; i++) {
 
             if (books[i].isCheckedOut() == false) {
                 System.out.println("TITLE: " + books[i].getTitle());
@@ -91,15 +89,15 @@ public class Main {
         int checkOutId = scanner.nextInt();
         scanner.nextLine();
 
-        if(checkOutId != 0){
+        if (checkOutId != 0) {
             boolean found = false;
 
             for (int i = 0; i < books.length; i++) {
                 //IF THE ID IS A MATCH
-                if(books[i].getId() == checkOutId) {
+                if (books[i].getId() == checkOutId) {
                     found = true;
                     //Continue with asking for users info and logging it while sending an output to user
-                    if(books[i].isCheckedOut() == false) {
+                    if (books[i].isCheckedOut() == false) {
                         System.out.println("Please Provide Your Name for the Library's Borrowing Records: ");
                         String personCheckout = scanner.nextLine();
 
@@ -112,22 +110,58 @@ public class Main {
                     }
                 }
             }
+
             //invalid input/ user message
-            if(found == false) {
+            if (found == false) {
                 System.out.println("No Record of This Book Exists in the Archives. Please Enter Valid ID");
             }
         }
     }
 
-    public static void checkedOutList(Book[] books, Scanner scanner){
+    public static void checkedOutList(Book[] books, Scanner scanner) {
         //LIST
         System.out.println("\nTHESE SCROLLS ARE CURRENTLY IN THE HANDS OF OTHER SEEKERS");
         System.out.println("⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔\n");
 
+        for (int i = 0; i < books.length; i++) {
+            //shows only those marked as checked out
+            if (books[i].isCheckedOut() == true) {
+                System.out.println("Current seeker holding this Book: " + books[i].getCheckedOutTo());
+                System.out.println("TITLE: " + books[i].getTitle());
+                System.out.println("ID: " + books[i].getId());
+                System.out.println("ISBN: " + books[i].getIsBn());
+                System.out.println("");
+            }
+        }
 
+        //PROMPT(C OR X)
+        System.out.println("\nTHE KEEPER'S ARCHIVES");
+        System.out.println("⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔⏔");
+        System.out.println("What would you like to do next, seeker?\n");
+
+        System.out.println("⋆☽ (C) Return a Book to the Library");
+        System.out.println("⋆☽ (X) Return to the Library Entrance");
+        System.out.print("\nChoose Your Path: ");
+
+        String checkedOutAnswer= scanner.nextLine();
+
+        if (checkedOutAnswer.equals("C")) {
+            boolean matched = false;
+            System.out.println("Enter the ID of the Book you Wish to Return to the Library, Seeker: ");
+            int returnId = scanner.nextInt();
+            scanner.nextLine();
+
+
+            for (int i = 0; i < books.length; i++) {
+                if (books[i].getId() == returnId) {
+                    books[i].checkIn();
+                    System.out.println("The Book has been returned to the Library. The keeper thanks you !\n");
+                    System.out.println("Press Enter to return to the Library Entrance...");
+                    scanner.nextLine();
+                }
+            }
+
+
+        }
     }
-
-
-
-
 }
