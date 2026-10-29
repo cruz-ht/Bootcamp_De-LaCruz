@@ -9,7 +9,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Book[] books = new Book[20];
-
         books[0] = new Book(1001, "9780000000011", "The Hobbit", true, "Liam Carter");
         books[1] = new Book(1002, "9780000000028", "The Lord of the Rings (Omnibus)", false, "");
         books[2] = new Book(1003, "9780000000035", "Harry Potter and the Sorcerer's Stone", true, "Ava Thompson");
@@ -63,7 +62,6 @@ public class Main {
 
                 default:
                     System.out.println("This Path is Unknown, Please Try Again.");
-
             }
         }
     }
