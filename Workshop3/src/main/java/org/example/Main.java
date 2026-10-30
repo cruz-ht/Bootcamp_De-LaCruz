@@ -1,4 +1,5 @@
 package org.example;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         List<Product> storeProducts = FileManager.readProducts();
+        List<Product> newCart = new ArrayList<>();
 
 
 
@@ -30,7 +32,7 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    availableProducts(storeProducts,scanner);
+                    availableProducts(storeProducts,scanner,newCart);
                     break;
 
                 case 2:
@@ -48,7 +50,7 @@ public class Main {
 
 
     //METHODS
-    public static void availableProducts(List<Product> products, Scanner scanner){
+    public static void availableProducts(List<Product> products, Scanner scanner, List<Product> cart){
         System.out.println("\nGEAR CATALOG");
         System.out.println("Browse Available Hardware. Find your next Upgrade.\n");
 
@@ -64,7 +66,7 @@ public class Main {
             System.out.println("[1]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Search/Filter");
             System.out.println("[2]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Add Gear to Loadout");
             System.out.println("[3]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Return to Main Menu");
-            System.out.println("\nInput: ");
+            System.out.println("\nEnter Command: ");
             option = scanner.nextInt();
             scanner.nextLine();
 
@@ -72,7 +74,7 @@ public class Main {
             switch (option) {
                 //SEARCHING BY SKU
                 case 1:
-                    System.out.println("Enter SKU: ");
+                    System.out.println("Enter product SKU to begin your scan: ");
                     String userSku = scanner.nextLine();
 
                     boolean found = false;
@@ -84,26 +86,41 @@ public class Main {
                         }
                     }
                     if(found == false){
-                        System.out.println("SKU NOT FOUND\\ ");
+                        System.out.println("No Matching Gear Detected. Refine your Search and Try Again.\\ ");
                     }
                     break;
 
+
                     //ADDING GEAR/ITEM
                 case 2:
-                    System.out.println("Coming Soon");
+                    System.out.println("Enter the Item SKU you'd like to Add: ");
+                    String addSku = scanner.nextLine();
+
+                    boolean added = false;
+                    for(int i = 0; i < products.size(); i++) {
+                        Product product = products.get(i);
+                        if(addSku.equalsIgnoreCase(product.getSku())) {
+                            cart.add(product);
+                            added = true;
+                            System.out.println("\nTransfer complete. " + product.getItemName() + " added to your loadout.\n");
+                        }
+                    }
+                    if(added == false){
+                        System.out.println("No Matching Gear Detected..");
+                    }
                     break;
 
                 case 3:
-                    System.out.println("\n- RETURNING TO MAIN MENU -\n");
+                    //RETURN TO MAIN MENU
+                    System.out.println("\n- Exiting the Catalog. Returning to the Main Menu...\n");
                     break;
-
                 default:
                     System.out.println("UNKNOWN COMMAND // Try another input, runner.\n");
-
             }
         }
-
     }
+
+
 
 
 }
