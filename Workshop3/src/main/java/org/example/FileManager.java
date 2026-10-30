@@ -15,6 +15,8 @@ public class FileManager {
 
             String line;
 
+            bufferedReader.readLine(); // reads the first line aka ignores the header when parsing data
+
             while((line = bufferedReader.readLine()) != null) {
                 String[] brokenUpRow = line.split("\\|");
 
@@ -34,25 +36,5 @@ public class FileManager {
             System.out.println("Could not read data from the file. Check the format");
         }
         return productList;
-    }
-
-    public static void writeProduct(Product product){
-        try{
-            FileWriter fileWriter = new FileWriter("src/main/resources/products.csv", true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            String line = String.format("%s|%s|%f|%s",product.getSku(),product.getItemName(),product.getPrice(), product.getDepartment());
-
-            bufferedWriter.newLine();
-            bufferedWriter.write(line);
-
-            bufferedWriter.close();
-        }
-        catch (IOException ex) {
-            System.out.println("Could not write to the file.");
-        }
-        catch (Exception ex) {
-            System.out.println("Error when handling the data.");
-        }
     }
 }
