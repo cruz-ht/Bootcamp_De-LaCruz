@@ -9,7 +9,7 @@ public class Main {
     public static final String RESET = "\u001B[0m";
     public static final String HEADER = "\u001B[95m";
     public static final String USERINPUT = "\u001B[96m";
-    public static final String ERROR = "\u001B[0m";
+    public static final String ERROR = "\033[31m";
 
 
 
@@ -96,7 +96,7 @@ public class Main {
                         }
                     }
                     if (found == false) {
-                        System.out.println(ERROR + "No Matching Gear Detected. Refine your Search and Try Again.\\ " + RESET);
+                        System.out.println(ERROR + "No Matching Gear Detected. Refine your Search and Try Again. " + RESET);
                     }
                     break;
                 //ADDING GEAR/ITEM
@@ -143,7 +143,7 @@ public class Main {
                 System.out.printf("SKU: %s | %s, %.2f%n", product.getSku(), product.getItemName(), product.getPrice());
                 total += product.getPrice();
             }
-            System.out.printf("Total Cost: $ %.2f%n", total);
+            System.out.printf("Total Cost: €$ %.2f%n", total);
 
             //INSIDE MENU
             System.out.println("\nAVAILABLE ACTIONS: ");
