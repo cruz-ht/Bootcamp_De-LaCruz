@@ -3,9 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
+    //COLOR LIST
+    public static final String RESET = "\u001B[0m";
+    public static final String HEADER = "\u001B[95m";
+    public static final String USERINPUT = "\u001B[96m";
+    public static final String ERROR = "\u001B[0m";
+
+
+
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -18,15 +27,15 @@ public class Main {
         // while(option !=3)
         while (!option.equals("3")) {
 
-            System.out.println("\nWELCOME, RUNNER.");
+            System.out.println(HEADER + "\nWELCOME, RUNNER." + RESET);
             System.out.println("Your next upgrade starts here. Access the marketplace below.");
 
             System.out.println("\nSELECT YOUR DESTINATION_");
-            System.out.println("[1]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Browse the Shop");
-            System.out.println("[2]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  View Selected Gear");
-            System.out.println("[3]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Disconnect");
+            System.out.println(USERINPUT + "[1]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Browse the Shop");
+            System.out.println(USERINPUT + "[2]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  View Selected Gear");
+            System.out.println(USERINPUT + "[3]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Disconnect");
 
-            System.out.println("\nEnter Command: ");
+            System.out.println(USERINPUT + "\nEnter Command: " + RESET);
 
             option = scanner.nextLine();
 
@@ -40,10 +49,10 @@ public class Main {
                     break;
 
                 case "3":
-                    System.out.println("CONNECTION TERMINATED // Until next time, Runner.");
+                    System.out.println(HEADER + "CONNECTION TERMINATED // Until next time, Runner." + RESET);
                     break;
                 default:
-                    System.out.println("\nUNKNOWN COMMAND // Try another input, runner.\n");
+                    System.out.println(ERROR + "\nUNKNOWN COMMAND // Try another input, runner.\n" + RESET);
 
             }
         }
@@ -53,7 +62,7 @@ public class Main {
     //METHODS
     // 1ST OPTION- AVAILABLE PRODUCTS/SEARCH/ADD TO CART
     public static void availableProducts(List<Product> products, Scanner scanner, List<Product> cart) {
-        System.out.println("\nGEAR CATALOG");
+        System.out.println(HEADER + "\nGEAR CATALOG" + RESET);
         System.out.println("Browse Available Hardware. Find your next Upgrade.\n");
 
         //prints out list of available items
@@ -65,17 +74,17 @@ public class Main {
         String option = "";
         while (!option.equals("3")) {
             System.out.println("\nAVAILABLE ACTIONS: ");
-            System.out.println("[1]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Search");
-            System.out.println("[2]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Add Gear to Loadout");
-            System.out.println("[3]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Return to Main Menu");
-            System.out.println("\nEnter Command: ");
+            System.out.println(USERINPUT + "[1]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Search");
+            System.out.println(USERINPUT + "[2]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Add Gear to Loadout");
+            System.out.println(USERINPUT + "[3]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Return to Main Menu");
+            System.out.println(USERINPUT + "\nEnter Command: " + RESET);
             option = scanner.nextLine();
 
 
             switch (option) {
                 //SEARCHING BY SKU
                 case "1":
-                    System.out.println("Enter product SKU to begin your scan: ");
+                    System.out.println(USERINPUT + "Enter product SKU to begin your scan: " + RESET);
                     String userSku = scanner.nextLine();
 
                     boolean found = false;
@@ -87,12 +96,12 @@ public class Main {
                         }
                     }
                     if (found == false) {
-                        System.out.println("No Matching Gear Detected. Refine your Search and Try Again.\\ ");
+                        System.out.println(ERROR + "No Matching Gear Detected. Refine your Search and Try Again.\\ " + RESET);
                     }
                     break;
                 //ADDING GEAR/ITEM
                 case "2":
-                    System.out.println("Enter the Item SKU you'd like to Add: ");
+                    System.out.println(USERINPUT + "Enter the Item SKU you'd like to Add: " + RESET);
                     String addSku = scanner.nextLine();
 
                     boolean added = false;
@@ -105,7 +114,7 @@ public class Main {
                         }
                     }
                     if (added == false) {
-                        System.out.println("No Matching Gear Detected..");
+                        System.out.println(ERROR + "No Matching Gear Detected.." + RESET);
                     }
                     break;
                 //RETURN TO MAIN
@@ -113,14 +122,14 @@ public class Main {
                     System.out.println("\n Exiting the Catalog. Returning to the Main Menu...\n");
                     break;
                 default:
-                    System.out.println("\n-- UNKNOWN COMMAND // Try another input, runner. --\n");
+                    System.out.println(ERROR + "\n-- UNKNOWN COMMAND // Try another input, runner. --\n" + RESET);
             }
         }
     }
 
     // 2ND OPTION- VIEW CART/TOTAL/REMOVE
     public static void cartProducts(List<Product> cart, Scanner scanner) {
-        System.out.println("\nYOUR CURRENT LOADOUT");
+        System.out.println(HEADER + "\nYOUR CURRENT LOADOUT" + RESET);
         System.out.println("Review your Selected Gear before Checkout.\n");
 
 
@@ -138,15 +147,15 @@ public class Main {
 
             //INSIDE MENU
             System.out.println("\nAVAILABLE ACTIONS: ");
-            System.out.println("[1]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Remove Gear");
-            System.out.println("[2]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Return to Main Menu");
-            System.out.println("\nEnter Command: ");
+            System.out.println(USERINPUT + "[1]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Remove Gear");
+            System.out.println(USERINPUT + "[2]"+ RESET+ "  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Return to Main Menu");
+            System.out.println(USERINPUT + "\nEnter Command: " + RESET);
             option = scanner.nextLine();
 
             switch (option) {
                 //REMOVE ITEM FROM CART
                 case "1":
-                    System.out.println("\nEnter the Product SKU you wish to Remove: ");
+                    System.out.println(USERINPUT + "\nEnter the Product SKU you wish to Remove: " + RESET);
                     String returnSku = scanner.nextLine();
 
                     boolean removed= false;
@@ -162,7 +171,7 @@ public class Main {
                         }
                     }
                     if(removed == false){
-                        System.out.println("\nGear not found in your loadout. Verify the product SKU.\n");
+                        System.out.println(ERROR + "\nGear not found in your loadout. Verify the product SKU.\n" + RESET);
                     }
                     break;
                     //RETURN TO MAIN
@@ -170,7 +179,7 @@ public class Main {
                     System.out.println("\nLoadout Closed. Returning to the Main Menu...\n");
                     break;
                 default:
-                    System.out.println("\n-- UNKNOWN COMMAND // Try another input, runner. --\n");
+                    System.out.println(ERROR + "\n-- UNKNOWN COMMAND // Try another input, runner. --\n" + RESET);
             }
         }
     }
