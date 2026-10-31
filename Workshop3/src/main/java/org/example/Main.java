@@ -13,8 +13,10 @@ public class Main {
         List<Product> newCart = new ArrayList<>();
 
 
-        int option = 0;
-        while (option != 3) {
+        String option = "";
+
+        // while(option !=3)
+        while (!option.equals("3")) {
 
             System.out.println("\nWELCOME, RUNNER.");
             System.out.println("Your next upgrade starts here. Access the marketplace below.");
@@ -26,23 +28,22 @@ public class Main {
 
             System.out.println("\nEnter Command: ");
 
-            option = scanner.nextInt();
-            scanner.nextLine();
+            option = scanner.nextLine();
 
             switch (option) {
-                case 1:
+                case "1":
                     availableProducts(storeProducts, scanner, newCart);
                     break;
 
-                case 2:
+                case "2":
                     cartProducts(newCart, scanner);
                     break;
 
-                case 3:
+                case "3":
                     System.out.println("CONNECTION TERMINATED // Until next time, Runner.");
-                    System.exit(0);
+                    break;
                 default:
-                    System.out.println("UNKNOWN COMMAND // Try another input, runner.\n");
+                    System.out.println("\nUNKNOWN COMMAND // Try another input, runner.\n");
 
             }
         }
@@ -61,20 +62,19 @@ public class Main {
             System.out.printf("SKU: %s | %s, %.2f, %s %n", product.getSku(), product.getItemName(), product.getPrice(), product.getDepartment());
         }
         //inside menu
-        int option = 0;
-        while (option != 3) {
+        String option = "";
+        while (!option.equals("3")) {
             System.out.println("\nAVAILABLE ACTIONS: ");
             System.out.println("[1]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Search");
             System.out.println("[2]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Add Gear to Loadout");
             System.out.println("[3]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Return to Main Menu");
             System.out.println("\nEnter Command: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
+            option = scanner.nextLine();
 
 
             switch (option) {
                 //SEARCHING BY SKU
-                case 1:
+                case "1":
                     System.out.println("Enter product SKU to begin your scan: ");
                     String userSku = scanner.nextLine();
 
@@ -91,7 +91,7 @@ public class Main {
                     }
                     break;
                 //ADDING GEAR/ITEM
-                case 2:
+                case "2":
                     System.out.println("Enter the Item SKU you'd like to Add: ");
                     String addSku = scanner.nextLine();
 
@@ -109,7 +109,7 @@ public class Main {
                     }
                     break;
                 //RETURN TO MAIN
-                case 3:
+                case "3":
                     System.out.println("\n Exiting the Catalog. Returning to the Main Menu...\n");
                     break;
                 default:
@@ -124,8 +124,8 @@ public class Main {
         System.out.println("Review your Selected Gear before Checkout.\n");
 
 
-        int option = 0;
-        while (option != 2) {
+        String option = "";
+        while (!option.equals("2")) {
 
             float total = 0;
             //prints out list of available items w/ total formula
@@ -141,12 +141,11 @@ public class Main {
             System.out.println("[1]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Remove Gear");
             System.out.println("[2]  ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤ ⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤⃤  Return to Main Menu");
             System.out.println("\nEnter Command: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
+            option = scanner.nextLine();
 
             switch (option) {
                 //REMOVE ITEM FROM CART
-                case 1:
+                case "1":
                     System.out.println("\nEnter the Product SKU you wish to Remove: ");
                     String returnSku = scanner.nextLine();
 
@@ -167,7 +166,7 @@ public class Main {
                     }
                     break;
                     //RETURN TO MAIN
-                case 2:
+                case "2":
                     System.out.println("\nLoadout Closed. Returning to the Main Menu...\n");
                     break;
                 default:
