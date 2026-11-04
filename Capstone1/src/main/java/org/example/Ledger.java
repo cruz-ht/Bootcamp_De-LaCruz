@@ -28,7 +28,7 @@ public class Ledger {
             System.out.println(ACCENTS + "[5] " + RESET +"Return to Main Menu");
             System.out.println(ACCENTS + "───────────────────────────────" + RESET);
 
-            System.out.println(SUBTEXT + "Please Select an Option: " + RESET);
+            System.out.println(SUBTEXT + "Please Select an Option to Continue: " + RESET);
             option = scanner.nextLine();
 
             switch(option) {
@@ -113,9 +113,6 @@ public class Ledger {
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
-
-
-
 
 
     //REPORT METHODS + MINI WHILE MENU

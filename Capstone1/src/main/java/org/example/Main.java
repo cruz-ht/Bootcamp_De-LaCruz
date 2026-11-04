@@ -69,6 +69,21 @@ public class Main {
 
     //MAIN SCREEN METHODS
 
+    //NEW ADDITIONAL HELPER- EXTRA VALIDATION (whitespace and length)
+    public static String getValidInput(Scanner scanner, String prompt, int minLength){
+        String input = "";
+
+        while(input.length() < minLength){
+            System.out.println(SUBTEXT + prompt + RESET);
+            input = scanner.nextLine().trim();
+
+            if(input.length() < minLength){
+                System.out.println(ERROR + "INVALID ENTRY" + RESET);
+                System.out.printf(ERROR + "Reason: Must be at least %d characters. Please Try Again.%n%n" + RESET, minLength);
+            }
+        }
+        return input;
+    }
 
     //DEPOSITING
     public static void addDeposit(List<Transaction> transactionList, Scanner scanner) {
@@ -76,10 +91,8 @@ public class Main {
         System.out.println(SUBTEXT + "Enter the Transaction Information Below." + RESET);
         System.out.println(ACCENTS + "─────────────────────────────────────────────" + RESET);
 
-        System.out.println(SUBTEXT + "Transaction Description: " + RESET);
-        String userDesc = scanner.nextLine();
-        System.out.println(SUBTEXT + "Deposit Source or Vendor: " + RESET);
-        String userVendor = scanner.nextLine();
+        String userDesc = getValidInput(scanner, "Transaction Description: ",3);
+        String userVendor = getValidInput(scanner, "Deposit Source or Vendor: ", 2);
 
         double amount = 0;
 
@@ -121,16 +134,13 @@ public class Main {
         System.out.println(ACCENTS + "─────────────────────────────────────────────" + RESET);
 
 
-        System.out.println("Transaction Description: ");
-        String userDesc = scanner.nextLine();
-
-        System.out.println("Payment Recipient: ");
-        String userVendor = scanner.nextLine();
+        String userDesc = getValidInput(scanner, "Transaction Description: ", 3);
+        String userVendor = getValidInput(scanner, "Payment Recipient: ", 2);
 
         double amount = 0;
 
         while (amount <= 0) {
-            System.out.println("Payment Amount (USD, Excluding $): ");
+            System.out.println(SUBTEXT + "Payment Amount (USD, Excluding $): " + RESET);
 
             try{
                 amount = Double.parseDouble(scanner.nextLine());
