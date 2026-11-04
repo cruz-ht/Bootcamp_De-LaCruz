@@ -74,6 +74,8 @@ public class Ledger {
     public static void displayAll(List<Transaction> transactionList){
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "ALL TRANSACTIONS\n" + RESET);
+        System.out.println(SUBTEXT + "Account Activity • Newest to Oldest\n"+ RESET);
+
 
         for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
@@ -85,8 +87,10 @@ public class Ledger {
      public static void displayDeposits(List<Transaction> transactionList){
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "DEPOSIT HISTORY\n" + RESET);
+        System.out.println(SUBTEXT + "Deposit Activity • Newest to Oldest\n"+ RESET);
 
-        for (int i = 0; i < transactionList.size(); i++) {
+
+         for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
             if(transaction.getAmount() > 0){
                 printTransaction(transaction);
@@ -98,6 +102,8 @@ public class Ledger {
     public static void displayPayments(List<Transaction> transactionList){
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "PAYMENT HISTORY\n" + RESET);
+        System.out.println(SUBTEXT + "Payment Activity • Newest to Oldest\n"+ RESET);
+
 
         for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
@@ -161,7 +167,6 @@ public class Ledger {
                 default:
                     System.out.println(ERROR + "INVALID SELECTION" + RESET);
                     System.out.println(ERROR + "Please enter a Valid Menu Option.\n\n" + RESET);
-
             }
         }
     }
@@ -182,7 +187,6 @@ public class Ledger {
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
-
     //PREV MONTH
     public static void previousMonth(List<Transaction> transactionList){
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
@@ -200,7 +204,6 @@ public class Ledger {
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
-
     //YEAR TO DATE
     public static void yearToDate(List<Transaction> transactionList){
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);

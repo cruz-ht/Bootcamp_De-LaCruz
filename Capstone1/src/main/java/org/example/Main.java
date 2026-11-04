@@ -47,7 +47,7 @@ public class Main {
                     break;
 
                 case "3":
-                    System.out.println(HEADER + "\nAccessing your Account Activity...\n\n");
+                    System.out.println(HEADER + "\nAccessing your Account Activity...\n\n" + RESET);
                     try {
                         Thread.sleep(500);
                     }
@@ -68,6 +68,7 @@ public class Main {
     }
 
     //MAIN SCREEN METHODS
+
 
     //DEPOSITING
     public static void addDeposit(List<Transaction> transactionList, Scanner scanner) {
@@ -140,7 +141,7 @@ public class Main {
             }
             catch (NumberFormatException ex) {
                 System.out.println(ERROR + "INVALID ENTRY" + RESET);
-                System.out.println(ERROR + "Reason: Unable to Deposit. Please Enter a Valid Numerical Amount.\n\n" + RESET);
+                System.out.println(ERROR + "Reason: Unable to Create Payment. Please Enter a Valid Numerical Amount.\n\n" + RESET);
             }
         }
 
