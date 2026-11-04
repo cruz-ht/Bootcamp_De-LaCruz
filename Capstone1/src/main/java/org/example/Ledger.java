@@ -9,29 +9,29 @@ import java.util.Scanner;
 import static org.example.Main.*;
 
 public class Ledger {
-    public static void showLedger(List<Transaction> transactionList, Scanner scanner){
+    public static void showLedger(List<Transaction> transactionList, Scanner scanner) {
 
         //Comparator- A list can sort itself if you give it a rule for comparing two items.In this case,Sort the list by date, then by time for ties, then reverse it so the newest comes first.
         transactionList.sort(Comparator.comparing(Transaction::getDate).thenComparing(Transaction::getTime).reversed());
 
         String option = "";
-        while(!option.equals("5")) {
+        while (!option.equals("5")) {
 
             System.out.println(BOLD + HEADER + "\nACCOUNT LEDGER" + RESET);
 
-            System.out.println("Review your account activity.");
+            System.out.println("Review your Account Activity");
             System.out.println(ACCENTS + "───────────────────────────────" + RESET);
-            System.out.println(ACCENTS + "[1] " + RESET +"All Transactions");
-            System.out.println(ACCENTS + "[2] " + RESET +"Deposits");
-            System.out.println(ACCENTS + "[3] " + RESET +"Payments");
-            System.out.println(ACCENTS + "[4] " + RESET +"Reports");
-            System.out.println(ACCENTS + "[5] " + RESET +"Return to Main Menu");
+            System.out.println(ACCENTS + "[1] " + RESET + "All Transactions");
+            System.out.println(ACCENTS + "[2] " + RESET + "Deposits");
+            System.out.println(ACCENTS + "[3] " + RESET + "Payments");
+            System.out.println(ACCENTS + "[4] " + RESET + "Reports");
+            System.out.println(ACCENTS + "[5] " + RESET + "Return to Main Menu");
             System.out.println(ACCENTS + "───────────────────────────────" + RESET);
 
             System.out.println(SUBTEXT + "Please Select an Option to Continue: " + RESET);
             option = scanner.nextLine();
 
-            switch(option) {
+            switch (option) {
                 case "1":
                     displayAll(transactionList);
                     break;
@@ -48,8 +48,7 @@ public class Ledger {
                     System.out.println(HEADER + "\n Returning to Main Menu...\n\n" + RESET);
                     try {
                         Thread.sleep(300);
-                    }
-                    catch (InterruptedException ex) {
+                    } catch (InterruptedException ex) {
                         System.out.println("Loading interrupted.");
                     }
                     break;
@@ -65,16 +64,16 @@ public class Ledger {
     public static void printTransaction(Transaction transaction) {
         DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        System.out.printf("|%s  %s| %-28s %-15s ...... $ %,.2f%n",transaction.getDate(), transaction.getTime().format(timeFormat), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+        System.out.printf("|%s  %s| %-28s %-15s ...... $ %,.2f%n", transaction.getDate(), transaction.getTime().format(timeFormat), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
     }
 
 
     //LEDGER METHODS
     //DISPLAY ALL
-    public static void displayAll(List<Transaction> transactionList){
+    public static void displayAll(List<Transaction> transactionList) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "ALL TRANSACTIONS\n" + RESET);
-        System.out.println(SUBTEXT + "Account Activity • Newest to Oldest\n"+ RESET);
+        System.out.println(SUBTEXT + "Account Activity • Newest to Oldest\n" + RESET);
 
 
         for (int i = 0; i < transactionList.size(); i++) {
@@ -83,31 +82,33 @@ public class Ledger {
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
+
     //DEPOSIT DISPLAY
-     public static void displayDeposits(List<Transaction> transactionList){
+    public static void displayDeposits(List<Transaction> transactionList) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "DEPOSIT HISTORY\n" + RESET);
-        System.out.println(SUBTEXT + "Deposit Activity • Newest to Oldest\n"+ RESET);
+        System.out.println(SUBTEXT + "Deposit Activity • Newest to Oldest\n" + RESET);
 
 
-         for (int i = 0; i < transactionList.size(); i++) {
+        for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
-            if(transaction.getAmount() > 0){
+            if (transaction.getAmount() > 0) {
                 printTransaction(transaction);
             }
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
+
     //PAYMENT DISPLAY
-    public static void displayPayments(List<Transaction> transactionList){
+    public static void displayPayments(List<Transaction> transactionList) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "PAYMENT HISTORY\n" + RESET);
-        System.out.println(SUBTEXT + "Payment Activity • Newest to Oldest\n"+ RESET);
+        System.out.println(SUBTEXT + "Payment Activity • Newest to Oldest\n" + RESET);
 
 
         for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
-            if(transaction.getAmount() < 0){
+            if (transaction.getAmount() < 0) {
                 printTransaction(transaction);
             }
         }
@@ -156,8 +157,7 @@ public class Ledger {
                     System.out.println(HEADER + "\n Returning to Ledger Menu...\n\n" + RESET);
                     try {
                         Thread.sleep(300);
-                    }
-                    catch (InterruptedException ex) {
+                    } catch (InterruptedException ex) {
                         System.out.println("Loading interrupted.");
                     }
                     break;
@@ -169,25 +169,28 @@ public class Ledger {
     }
 
     //MONTH TO DATE
-    public static void monthToDate(List<Transaction> transactionList){
+    public static void monthToDate(List<Transaction> transactionList) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "MONTH-TO-DATE REPORT\n" + RESET);
+        System.out.println(SUBTEXT + "Month-to-Date Activity • Newest to Oldest\n" + RESET);
 
         LocalDate today = LocalDate.now();
 
         for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
 
-            if(transaction.getDate().getYear() == today.getYear() && transaction.getDate().getMonthValue() == today.getMonthValue()){
+            if (transaction.getDate().getYear() == today.getYear() && transaction.getDate().getMonthValue() == today.getMonthValue()) {
                 printTransaction(transaction);
             }
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
+
     //PREV MONTH
-    public static void previousMonth(List<Transaction> transactionList){
+    public static void previousMonth(List<Transaction> transactionList) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "PREVIOUS MONTH REPORT\n" + RESET);
+        System.out.println(SUBTEXT + "Previous Month Activity • Newest to Oldest\n" + RESET);
 
         LocalDate today = LocalDate.now();
         LocalDate lastMonth = today.minusMonths(1);
@@ -201,17 +204,19 @@ public class Ledger {
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
+
     //YEAR TO DATE
-    public static void yearToDate(List<Transaction> transactionList){
+    public static void yearToDate(List<Transaction> transactionList) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "YEAR-TO-DATE REPORT\n" + RESET);
+        System.out.println(SUBTEXT + "Year-to-Date Activity • Newest to Oldest\n" + RESET);
 
         LocalDate today = LocalDate.now();
 
         for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
 
-            if(transaction.getDate().getYear() == today.getYear()){
+            if (transaction.getDate().getYear() == today.getYear()) {
                 printTransaction(transaction);
             }
         }
@@ -219,9 +224,10 @@ public class Ledger {
     }
 
     //PREVIOUS YEAR
-    public static void previousYear(List<Transaction> transactionList){
+    public static void previousYear(List<Transaction> transactionList) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "PREVIOUS YEAR REPORT\n" + RESET);
+        System.out.println(SUBTEXT + "Previous Year Activity • Newest to Oldest\n" + RESET);
 
         LocalDate today = LocalDate.now();
         LocalDate lastYear = today.minusYears(1);
@@ -235,25 +241,26 @@ public class Ledger {
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
     }
+
     //SEARCH BY VENDOR
-    public static void vendorSearch(List<Transaction> transactionList, Scanner scanner){
+    public static void vendorSearch(List<Transaction> transactionList, Scanner scanner) {
         System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
         System.out.println(BOLD + "VENDOR TRANSACTION SEARCH\n" + RESET);
+        System.out.println(SUBTEXT + "Vendor Activity • Newest to Oldest\n" + RESET);
 
-        System.out.println(SUBTEXT + "Please Enter the Vendor's Name: " + RESET);
-        String userVendor = scanner.nextLine();
+        String userVendor = getValidInput(scanner, "Please Enter the Vendor's Name: ", 2);
 
         boolean found = false;
 
         for (int i = 0; i < transactionList.size(); i++) {
             Transaction transaction = transactionList.get(i);
 
-            if(userVendor.equalsIgnoreCase(transaction.getVendor())){
+            if (userVendor.equalsIgnoreCase(transaction.getVendor())) {
                 printTransaction(transaction);
                 found = true;
             }
         }
-        if( found == false) {
+        if (found == false) {
             System.out.println(ERROR + "No account activity found for the selected vendor.\n\n" + RESET);
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
