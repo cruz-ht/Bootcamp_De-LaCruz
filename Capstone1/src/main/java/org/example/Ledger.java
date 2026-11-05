@@ -1,5 +1,5 @@
 package org.example;
-
+import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -29,7 +29,7 @@ public class Ledger {
             System.out.println(ACCENTS + "───────────────────────────────" + RESET);
 
             System.out.println(SUBTEXT + "Please Select an Option to Continue: " + RESET);
-            option = scanner.nextLine();
+            option = scanner.nextLine().trim();
 
             switch (option) {
                 case "1":
@@ -131,6 +131,8 @@ public class Ledger {
             System.out.println(ACCENTS + "[3] " + RESET + "Year to Date");
             System.out.println(ACCENTS + "[4] " + RESET + "Previous Year");
             System.out.println(ACCENTS + "[5] " + RESET + "Search by Vendor");
+            System.out.println(ACCENTS + "[6] " + RESET + "Custom Search");
+
             System.out.println(ACCENTS + "[0] " + RESET + "Return to Ledger Menu");
             System.out.println(ACCENTS + "───────────────────────────────" + RESET);
 
@@ -152,6 +154,9 @@ public class Ledger {
                     break;
                 case "5":
                     vendorSearch(transactionList, scanner);
+                    break;
+                case "6":
+                    customSearch(transactionList, scanner);
                     break;
                 case "0":
                     System.out.println(HEADER + "\n Returning to Ledger Menu...\n\n" + RESET);
@@ -264,5 +269,99 @@ public class Ledger {
             System.out.println(ERROR + "No account activity found for the selected vendor.\n\n" + RESET);
         }
         System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
+    }
+
+    //CUSTOM SEARCH
+    public static void customSearch(List<Transaction> transactionList, Scanner scanner) {
+        System.out.println(BOLD + HEADER + "\nDLC VAULT BANKING" + RESET);
+        System.out.println(BOLD + "CUSTOM SEARCH" + RESET);
+        System.out.println(SUBTEXT + "Account Activity • Newest to Oldest\n" + RESET);
+        System.out.println("Press Enter to skip any field." + RESET);
+
+        //HELPERS-INIT VAR
+        LocalDate startDate = getOptionalDate(scanner, "Start Date (YYYY-MM-DD): ");
+        LocalDate endDate = getOptionalDate(scanner, "End Date (YYYY-MM-DD): ");
+
+        System.out.println(SUBTEXT + "Description: " + RESET);
+        String description = scanner.nextLine().trim();
+
+        System.out.println(SUBTEXT + "Vendor: " + RESET);
+        String vendor = scanner.nextLine().trim();
+
+        Double amount = getOptionalAmount(scanner, "Amount (Excluding $): ");
+
+        boolean found = false;
+
+        for (int i = 0; i < transactionList.size(); i++) {
+            Transaction transaction = transactionList.get(i);
+            boolean matches = true;
+
+            // START DATE FILTER
+            if (startDate != null && transaction.getDate().isBefore(startDate)) {
+                matches = false;
+            }
+            // END DATE
+            if (endDate != null && transaction.getDate().isAfter(endDate)) {
+                matches = false;
+            }
+            // DESCRIPTION
+            if (!description.isEmpty() && !transaction.getDescription().toLowerCase().contains(description.toLowerCase())) {
+                matches = false;
+            }
+            // VENDOR
+            if (!vendor.isEmpty() && !vendor.equalsIgnoreCase(transaction.getVendor())) {
+                matches = false;
+            }
+            // AMOUNT
+            if (amount != null && Math.abs(Math.abs(transaction.getAmount()) - amount) > 0.001) {
+                matches = false;
+            }
+            if (matches) {
+                printTransaction(transaction);
+                found = true;
+            }
+        }
+        if (found == false) {
+            System.out.println(ERROR + "\nNo Transactions match your Search Criteria\n\n" + RESET);
+        }
+        System.out.println(ACCENTS + "\n─────────────────────────────────────────────────────────────────\n" + RESET);
+    }
+
+    //HELPER - optional date (returns null if skipped)
+    public static LocalDate getOptionalDate(Scanner scanner, String prompt) {
+        while (true) {
+            System.out.println(SUBTEXT + prompt + RESET);
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) {
+                return null;
+            }
+            try {
+                return LocalDate.parse(input);
+            }
+            catch (DateTimeParseException ex) {
+                System.out.println(ERROR + "INVALID DATE" + RESET);
+                System.out.println(ERROR + "Reason: Please use the format YYYY-MM-DD, or press Enter to skip.\n" + RESET);
+            }
+        }
+    }
+
+    //HELPER - optional amount (returns null if skipped)
+    public static Double getOptionalAmount(Scanner scanner, String prompt) {
+        while (true) {
+            System.out.println(SUBTEXT + prompt + RESET);
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) {
+                return null;
+            }
+            try {
+                return Math.abs(Double.parseDouble(input));
+            }
+            catch (NumberFormatException ex) {
+                System.out.println(ERROR + "INVALID AMOUNT" + RESET);
+                System.out.println(ERROR + "Reason: Please enter a number, or press Enter to skip.\n" + RESET);
+            }
+        }
     }
 }

@@ -35,7 +35,7 @@ public class Main {
             System.out.println(ACCENTS + "──────────────────────────────────────" + RESET);
 
             System.out.println(SUBTEXT + "Please Select an Option to Continue: " + RESET);
-            option = scanner.nextLine();
+            option = scanner.nextLine().trim();
 
             switch(option) {
                 case "1":
