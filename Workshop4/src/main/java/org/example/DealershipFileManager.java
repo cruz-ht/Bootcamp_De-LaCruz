@@ -41,7 +41,6 @@ public class DealershipFileManager {
                 dealership.addVehicle(vehicle);
             }
             bufferedReader.close();
-
         }
         catch (IOException ex) {
             System.out.println("Could not read the file.");
