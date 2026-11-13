@@ -12,7 +12,7 @@ A Java console banking app for recording deposits and payments, reviewing accoun
 |---|---|
 | **Home** | Add Deposit · Make Payment · View Ledger · Exit |
 | **Ledger** | All Transactions · Deposits · Payments · Reports |
-| **Reports** | Month to Date · Previous Month · Year to Date · Previous Year · Search by Vendor |
+| **Reports** | Month to Date · Previous Month · Year to Date · Previous Year · Search by Vendor · Custom Search|
 
 -- All ledger views and reports display **newest to oldest**.
 

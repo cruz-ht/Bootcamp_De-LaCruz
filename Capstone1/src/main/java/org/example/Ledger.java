@@ -1,4 +1,5 @@
 package org.example;
+
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -338,8 +339,7 @@ public class Ledger {
             }
             try {
                 return LocalDate.parse(input);
-            }
-            catch (DateTimeParseException ex) {
+            } catch (DateTimeParseException ex) {
                 System.out.println(ERROR + "INVALID DATE" + RESET);
                 System.out.println(ERROR + "Reason: Please use the format YYYY-MM-DD, or press Enter to skip.\n" + RESET);
             }
@@ -357,8 +357,7 @@ public class Ledger {
             }
             try {
                 return Math.abs(Double.parseDouble(input));
-            }
-            catch (NumberFormatException ex) {
+            } catch (NumberFormatException ex) {
                 System.out.println(ERROR + "INVALID AMOUNT" + RESET);
                 System.out.println(ERROR + "Reason: Please enter a number, or press Enter to skip.\n" + RESET);
             }
