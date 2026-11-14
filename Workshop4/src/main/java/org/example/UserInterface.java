@@ -13,57 +13,59 @@ public class UserInterface {
     public void display() {
         init();
 
-        //main menu
         String option = "";
         while(!option.equals("0")){
             System.out.println("\n\nSugar Rush Motors");
             System.out.println("─────────────────");
 
-            System.out.println("1 ᰔ ");
-            System.out.println("2 ᰔ ");
-            System.out.println("3 ᰔ ");
-            System.out.println("4 ᰔ ");
-            System.out.println("5 ᰔ ");
-            System.out.println("6 ᰔ ");
-            System.out.println("7 ᰔ ");
-            System.out.println("8 ᰔ ");
-            System.out.println("9 ᰔ ");
-            System.out.println("0 ᰔ ");
+            System.out.println("THE SHOWROOM");
+            System.out.println("Find your next ride or manage the collection.\n");
+            System.out.println("1 ᰔ Find Vehicles by Price");
+            System.out.println("2 ᰔ Find by Make/Model");
+            System.out.println("3 ᰔ Find Vehicles by Year");
+            System.out.println("4 ᰔ Find Vehicles by Color");
+            System.out.println("5 ᰔ Find Vehicles by Mileage");
+            System.out.println("6 ᰔ Find Vehicles by Type");
+            System.out.println("7 ᰔ View All Vehicles");
+            System.out.println("8 ᰔ Add a Vehicle");
+            System.out.println("9 ᰔ Remove a Vehicle");
+            System.out.println("0 ᰔ Exit Showroom\n");
             System.out.println("Select a showroom option: ");
             option = scanner.nextLine().trim();
 
             switch (option) {
                 case "1":
-                    System.out.println("coming soon...");
+                    processGetByPriceRequest();
                     break;
                 case "2":
-                    System.out.println("coming soon...");
+                    processGetByMakeModelRequest();
                     break;
                 case "3":
-                    System.out.println("coming soon...");
+                    processGetByYearRequest();
                     break;
                 case "4":
-                    System.out.println("coming soon...");
+                    processGetByColorRequest();
                     break;
                 case "5":
-                    System.out.println("coming soon...");
+                    processGetByMileageRequest();
                     break;
                 case "6":
-                    System.out.println("coming soon...");
+                    processGetByVehicleTypeRequest();
                     break;
                 case "7":
-                    System.out.println("coming soon...");
+                    processGetAllVehiclesRequest();
                     break;
                 case "8":
-                    System.out.println("coming soon...");
+                    processAddVehicleRequest();
                     break;
                 case "9":
-                    System.out.println("coming soon...");
+                    processRemoveVehicleRequest();
                     break;
                 case "0":
-                    System.out.println("thank you for choosing..");
+                    System.out.println("Thanks for visiting Sugar Rush Motors. Until next time!");
                     break;
                 default:
+                    System.out.println("That choice isn't in our lineup. Please select another option!");
             }
         }
     }
@@ -74,10 +76,10 @@ public class UserInterface {
         this.dealership = fileManager.getDealership();
     }
 
+    //LIST FORMAT
     private void displayVehicles(List<Vehicle> vehicles){
-        System.out.printf("%-7s%-6s%-15s%-13s%-13s%-8s%-9s%s%n", "VIN", "Year", "Make", "Model", "Type", "Color", "Miles", "Price");
+        System.out.printf("%n%n%-7s%-6s%-15s%-13s%-13s%-8s%-9s%s%n", "VIN", "Year", "Make", "Model", "Type", "Color", "Miles", "Price");
         System.out.println("--------------------------------------------------------------------------------");
-
         for (Vehicle vehicle : vehicles) {
             System.out.printf("%-7d%-6d%-15s%-13s%-13s%-8s%-9d$%.2f%n",vehicle.getVin(),vehicle.getYear(), vehicle.getMake(),vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
         }
