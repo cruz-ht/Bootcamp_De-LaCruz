@@ -102,7 +102,6 @@ public class Dealership {
         return typeMatch;
     }
 
-
     public void addVehicle(Vehicle vehicle) {
         inventory.add(vehicle);
     }
@@ -114,5 +113,4 @@ public class Dealership {
     public List<Vehicle> getAllVehicles() {
         return inventory;
     }
-
 }

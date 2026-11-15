@@ -4,7 +4,6 @@ import java.io.*;
 import java.math.BigDecimal;
 
 public class DealershipFileManager {
-
     public Dealership getDealership() {
         Dealership dealership = null;
 
