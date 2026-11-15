@@ -57,7 +57,14 @@ public class Dealership {
     }
 
     public List<Vehicle> getVehiclesByYear(int min, int max) {
-        return null;
+        var yearMatch = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            //the if statement is making sure the range stays between the two numbers
+            if (vehicle.getYear() <= max && vehicle.getYear() >= min) {
+                yearMatch.add(vehicle);
+            }
+        }
+        return yearMatch;
     }
 
     public List<Vehicle> getVehiclesByColor(String color) {

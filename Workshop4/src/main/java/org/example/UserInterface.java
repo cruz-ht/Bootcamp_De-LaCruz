@@ -84,6 +84,17 @@ public class UserInterface {
             System.out.printf("%-8d%-7d%-15s%-13s%-13s%-8s%-9d$%.2f%n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
         }
     }
+    //WHILE LOOP HELPER FOR INT VALUES
+    private int loopForInt(String question) {
+        while (true) {
+            System.out.println(question);
+            try {
+                return Integer.parseInt(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please use numbers only and try again.\n");
+            }
+        }
+    }
 
     public void processGetByPriceRequest() {
     }
@@ -99,13 +110,24 @@ public class UserInterface {
 
         var makeModelResult = dealership.getVehiclesByMakeModel(usersMake, usersModel);
         if (makeModelResult.isEmpty()) {
-            System.out.println("We couldn't find that make or model in our collection. Try another search!\n");
+            System.out.println("\nWe couldn't find that make or model in our collection. Try another search!\n");
         } else {
             displayVehicles(makeModelResult);
         }
     }
 
     public void processGetByYearRequest() {
+        System.out.println("\n\n Find Your Ride by Year");
+        System.out.println("Let's narrow down the collection by model year!\n");
+        int usersMinYear = loopForInt("Enter starting year: ");
+        int usersMaxYear = loopForInt("Enter ending year: ");
+
+        var yearResults = dealership.getVehiclesByYear(usersMinYear, usersMaxYear);
+        if (yearResults.isEmpty()) {
+            System.out.println("\nNo vehicles found within those model years. Try a different year range!\n");
+        } else {
+            displayVehicles(yearResults);
+        }
     }
 
     public void processGetByColorRequest() {
