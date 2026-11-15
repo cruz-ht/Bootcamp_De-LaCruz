@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 
 public class DealershipFileManager {
@@ -36,21 +34,39 @@ public class DealershipFileManager {
                 int odometer = Integer.parseInt(vehicleParts[6]);
                 BigDecimal price = new BigDecimal(vehicleParts[7]);
 
-                Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer,price);
+                Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
 
                 dealership.addVehicle(vehicle);
             }
             bufferedReader.close();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             System.out.println("Could not read the file.");
         }
         return dealership;
     }
 
 
-    public void saveDealership(Dealership dealership){
+    public void saveDealership(Dealership dealership) {
+        try {
+            FileWriter fileWriter = new FileWriter("src/main/resources/inventory.csv");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
+            //first line aka the dealership info
+            String line = String.format("%s|%s|%s", dealership.getName(), dealership.getAddress(), dealership.getPhone());
+            bufferedWriter.write(line);
+
+            for (Vehicle vehicle : dealership.getAllVehicles()) {
+                String vehicleLine = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
+                        vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(),
+                        vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
+
+                bufferedWriter.newLine();
+                bufferedWriter.write(vehicleLine);
+            }
+            bufferedWriter.close();
+
+        } catch (IOException ex) {
+            System.out.println("Could not save the dealership.");
+        }
     }
-
 }
