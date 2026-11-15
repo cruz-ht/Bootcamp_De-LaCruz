@@ -1,9 +1,7 @@
 package org.example;
 
-import java.io.BufferedWriter;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -82,7 +80,7 @@ public class UserInterface {
     //LIST FORMAT AKA HELPER
     private void displayVehicles(List<Vehicle> vehicles) {
         System.out.printf("%n%n%-8s%-7s%-15s%-13s%-13s%-8s%-9s%s%n", "VIN", "Year", "Make", "Model", "Type", "Color", "Miles", "Price");
-        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------");
         for (Vehicle vehicle : vehicles) {
             System.out.printf("%-8d%-7d%-15s%-13s%-13s%-8s%-9d$%.2f%n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
         }
@@ -129,7 +127,7 @@ public class UserInterface {
 
     public void processGetByMakeModelRequest() {
         System.out.println("\n\n Find by Make/Model");
-        System.out.println("Looking for something specific? Let's Find it!\n");
+        System.out.println("Looking for something specific? Let's find it!\n");
 
         System.out.println("Enter vehicle make: ");
         var usersMake = scanner.nextLine().trim();
@@ -214,7 +212,14 @@ public class UserInterface {
         System.out.println("Let's bring a new ride into the showroom!\n");
 
         int usersVehicleVin = loopForInt("Enter vehicle VIN: ");
-        int usersVehicleYear = loopForInt("Enter vehicle Year: ");
+        //need to make a loop later on so it doesn't throw to main menu auto
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.getVin() == usersVehicleVin) {
+                System.out.println("\nThat VIN is already in our showroom!");
+                return;
+            }
+        }
+        int usersVehicleYear = loopForInt("Enter vehicle year: ");
         System.out.println("Enter vehicle make: ");
         var usersVehicleMake = scanner.nextLine().trim();
         System.out.println("Enter vehicle model: ");
