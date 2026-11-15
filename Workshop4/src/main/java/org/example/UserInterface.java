@@ -104,7 +104,7 @@ public class UserInterface {
         var colorResults = dealership.getVehiclesByColor(usersColor);
         //instead of displaying an empty list, it'll show a msg
         if (colorResults.isEmpty()) {
-            System.out.println("\nThat color isn't in our collection just yet. Try another shade!");
+            System.out.println("\nThat color isn't in our collection just yet. Try another shade!\n");
         } else { //shortcut aka print in "displayVehicles method" and what im showing/passing through
             displayVehicles(colorResults);
         }
@@ -114,6 +114,18 @@ public class UserInterface {
     }
 
     public void processGetByVehicleTypeRequest() {
+        System.out.println("\n\nChoose Your Ride Style");
+        System.out.println("What type of vehicle are you looking for?\n");
+        System.out.println("Cars, Trucks, SUVs, and More !");
+        System.out.println("Enter your preferred vehicle type: ");
+        var usersType = scanner.nextLine().trim();
+
+        var typeResults = dealership.getVehiclesByType(usersType);
+        if (typeResults.isEmpty()) {
+            System.out.println("\nWe couldn't find any vehicles of that type. Try another category!\n");
+        } else {
+            displayVehicles(typeResults);
+        }
     }
 
     public void processGetAllVehiclesRequest() {
