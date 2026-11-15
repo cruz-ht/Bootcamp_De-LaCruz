@@ -1,7 +1,9 @@
 package org.example;
 
+import java.io.BufferedWriter;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -208,6 +210,31 @@ public class UserInterface {
     }
 
     public void processAddVehicleRequest() {
+        System.out.println("\n\n Add to The Collection");
+        System.out.println("Let's bring a new ride into the showroom!\n");
+
+        int usersVehicleVin = loopForInt("Enter vehicle VIN: ");
+        int usersVehicleYear = loopForInt("Enter vehicle Year: ");
+        System.out.println("Enter vehicle make: ");
+        var usersVehicleMake = scanner.nextLine().trim();
+        System.out.println("Enter vehicle model: ");
+        var usersVehicleModel = scanner.nextLine().trim();
+        System.out.println("Enter vehicle type: ");
+        var usersVehicleType = scanner.nextLine().trim();
+        System.out.println("Enter vehicle color: ");
+        var usersVehicleColor = scanner.nextLine().trim();
+        int usersVehicleMileage = loopForInt("Enter vehicle mileage: ");
+        BigDecimal usersVehiclePrice = loopForBigDecimal("Enter vehicle price: $ ");
+
+        Vehicle vehicle = new Vehicle(usersVehicleVin, usersVehicleYear, usersVehicleMake, usersVehicleModel, usersVehicleType, usersVehicleColor, usersVehicleMileage, usersVehiclePrice);
+
+        dealership.addVehicle(vehicle);
+
+        //new clerk that's saving compare to init
+        var fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+
+        System.out.println("\nYour new ride has been added to the showroom!");
     }
 
     public void processRemoveVehicleRequest() {
