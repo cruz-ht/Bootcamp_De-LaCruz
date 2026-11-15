@@ -84,6 +84,7 @@ public class UserInterface {
             System.out.printf("%-8d%-7d%-15s%-13s%-13s%-8s%-9d$%.2f%n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
         }
     }
+
     //WHILE LOOP HELPER FOR INT VALUES
     private int loopForInt(String question) {
         while (true) {
@@ -119,6 +120,7 @@ public class UserInterface {
     public void processGetByYearRequest() {
         System.out.println("\n\n Find Your Ride by Year");
         System.out.println("Let's narrow down the collection by model year!\n");
+
         int usersMinYear = loopForInt("Enter starting year: ");
         int usersMaxYear = loopForInt("Enter ending year: ");
 
@@ -147,6 +149,18 @@ public class UserInterface {
     }
 
     public void processGetByMileageRequest() {
+        System.out.println("\n\nFind By Mileage");
+        System.out.println("Let's find a ride that fits your mileage preference!\n");
+
+        int usersMinMileage = loopForInt("Enter minimum mileage: ");
+        int usersMaxMileage = loopForInt("Enter maximum mileage: ");
+
+        var mileageResults = dealership.getVehiclesByMileage(usersMinMileage, usersMaxMileage);
+        if (mileageResults.isEmpty()) {
+            System.out.println("No rides found within that mileage range. Let's adjust the search!");
+        } else {
+            displayVehicles(mileageResults);
+        }
     }
 
     public void processGetByVehicleTypeRequest() {
