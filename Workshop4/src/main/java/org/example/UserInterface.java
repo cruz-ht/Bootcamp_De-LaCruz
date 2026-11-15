@@ -1,5 +1,6 @@
 package org.example;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
@@ -97,7 +98,31 @@ public class UserInterface {
         }
     }
 
+    //WHILE LOOP HELPER FOR BIGDECIMAL VALUES
+    private BigDecimal loopForBigDecimal(String question) {
+        while (true) {
+            System.out.println(question);
+            try {
+                return new BigDecimal(scanner.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("\nPlease enter numbers only.\n");
+            }
+        }
+    }
+
     public void processGetByPriceRequest() {
+        System.out.println("\n\n Find Your Ride by Price");
+        System.out.println("Let's find something that fits your budget!\n");
+
+        BigDecimal usersMinPrice = loopForBigDecimal("Minimum price: $ ");
+        BigDecimal usersMaxPrice = loopForBigDecimal("Maximum price: $ ");
+
+        var priceResults = dealership.getVehiclesByPrice(usersMinPrice, usersMaxPrice);
+        if (priceResults.isEmpty()) {
+            System.out.println("No rides found within that price range. Try adjusting your budget!");
+        } else {
+            displayVehicles(priceResults);
+        }
     }
 
     public void processGetByMakeModelRequest() {

@@ -41,9 +41,14 @@ public class Dealership {
         this.phone = phone;
     }
 
-
     public List<Vehicle> getVehiclesByPrice(BigDecimal min, BigDecimal max) {
-        return null;
+        var priceMatch = new ArrayList<Vehicle>();
+        for (Vehicle vehicle : inventory) {
+            if (vehicle.getPrice().compareTo(min) >= 0 && vehicle.getPrice().compareTo(max) <= 0) {
+                priceMatch.add(vehicle);
+            }
+        }
+        return priceMatch;
     }
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
