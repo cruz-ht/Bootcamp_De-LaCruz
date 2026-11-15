@@ -89,6 +89,20 @@ public class UserInterface {
     }
 
     public void processGetByMakeModelRequest() {
+        System.out.println("\n\n Find by Make/Model");
+        System.out.println("Looking for something specific? Let's Find it!\n");
+
+        System.out.println("Enter vehicle make: ");
+        var usersMake = scanner.nextLine().trim();
+        System.out.println("\nEnter vehicle model: ");
+        var usersModel = scanner.nextLine().trim();
+
+        var makeModelResult = dealership.getVehiclesByMakeModel(usersMake, usersModel);
+        if (makeModelResult.isEmpty()) {
+            System.out.println("We couldn't find that make or model in our collection. Try another search!\n");
+        } else {
+            displayVehicles(makeModelResult);
+        }
     }
 
     public void processGetByYearRequest() {
