@@ -121,7 +121,7 @@ public class UserInterface {
 
         var priceResults = dealership.getVehiclesByPrice(usersMinPrice, usersMaxPrice);
         if (priceResults.isEmpty()) {
-            System.out.println("No rides found within that price range. Try adjusting your budget!");
+            System.out.println("\nNo rides found within that price range. Try adjusting your budget!");
         } else {
             displayVehicles(priceResults);
         }
@@ -184,7 +184,7 @@ public class UserInterface {
 
         var mileageResults = dealership.getVehiclesByMileage(usersMinMileage, usersMaxMileage);
         if (mileageResults.isEmpty()) {
-            System.out.println("No rides found within that mileage range. Let's adjust the search!");
+            System.out.println("\nNo rides found within that mileage range. Let's adjust the search!\n");
         } else {
             displayVehicles(mileageResults);
         }
@@ -193,7 +193,7 @@ public class UserInterface {
     public void processGetByVehicleTypeRequest() {
         System.out.println("\n\nChoose Your Ride Style");
         System.out.println("What type of vehicle are you looking for?\n");
-        System.out.println("Cars, Trucks, SUVs, and More !");
+        System.out.println("Options: convertible, coupe, SUV, truck");
         System.out.println("Enter your preferred vehicle type: ");
         var usersType = scanner.nextLine().trim();
 
@@ -238,6 +238,28 @@ public class UserInterface {
     }
 
     public void processRemoveVehicleRequest() {
-    }
+        System.out.println("\n\n Remove From The Collection");
+        System.out.println("Which ride are we taking out of the showroom?");
+        displayVehicles(dealership.getAllVehicles());
 
+        int usersVehicleVin = loopForInt("\nEnter the vehicle VIN: ");
+
+        Vehicle foundVehicle = null;
+
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.getVin() == usersVehicleVin) {
+                foundVehicle = vehicle;
+            }
+        }
+        if (foundVehicle != null) {
+            dealership.removeVehicle(foundVehicle);
+
+            var fileManager = new DealershipFileManager();
+            fileManager.saveDealership(dealership);
+
+            System.out.println("\nVehicle successfully removed from the collection.");
+        } else {
+            System.out.println("We couldn't find a vehicle with that VIN");
+        }
+    }
 }
