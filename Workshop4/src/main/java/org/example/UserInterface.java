@@ -14,7 +14,7 @@ public class UserInterface {
         init();
 
         String option = "";
-        while(!option.equals("0")){
+        while (!option.equals("0")) {
             System.out.println("\n\nSugar Rush Motors");
             System.out.println("─────────────────");
 
@@ -76,32 +76,53 @@ public class UserInterface {
         this.dealership = fileManager.getDealership();
     }
 
-    //LIST FORMAT
-    private void displayVehicles(List<Vehicle> vehicles){
-        System.out.printf("%n%n%-7s%-6s%-15s%-13s%-13s%-8s%-9s%s%n", "VIN", "Year", "Make", "Model", "Type", "Color", "Miles", "Price");
+    //LIST FORMAT AKA HELPER
+    private void displayVehicles(List<Vehicle> vehicles) {
+        System.out.printf("%n%n%-8s%-7s%-15s%-13s%-13s%-8s%-9s%s%n", "VIN", "Year", "Make", "Model", "Type", "Color", "Miles", "Price");
         System.out.println("--------------------------------------------------------------------------------");
         for (Vehicle vehicle : vehicles) {
-            System.out.printf("%-7d%-6d%-15s%-13s%-13s%-8s%-9d$%.2f%n",vehicle.getVin(),vehicle.getYear(), vehicle.getMake(),vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
+            System.out.printf("%-8d%-7d%-15s%-13s%-13s%-8s%-9d$%.2f%n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
         }
     }
 
     public void processGetByPriceRequest() {
     }
+
     public void processGetByMakeModelRequest() {
     }
+
     public void processGetByYearRequest() {
     }
+
     public void processGetByColorRequest() {
+        System.out.println("\n\n Find Your Perfect Color");
+        System.out.println("Every great ride deserves the perfect finish!\n");
+        System.out.println("Enter your preferred vehicle color: ");
+        var usersColor = scanner.nextLine().trim();
+
+        //searching the color using get and saving it as a var(to reuse in if/els
+        var colorResults = dealership.getVehiclesByColor(usersColor);
+        //instead of displaying an empty list, it'll show a msg
+        if (colorResults.isEmpty()) {
+            System.out.println("\nThat color isn't in our collection just yet. Try another shade!");
+        } else { //shortcut aka print in "displayVehicles method" and what im showing/passing through
+            displayVehicles(colorResults);
+        }
     }
+
     public void processGetByMileageRequest() {
     }
+
     public void processGetByVehicleTypeRequest() {
     }
+
     public void processGetAllVehiclesRequest() {
         displayVehicles(dealership.getAllVehicles());
     }
+
     public void processAddVehicleRequest() {
     }
+
     public void processRemoveVehicleRequest() {
     }
 
