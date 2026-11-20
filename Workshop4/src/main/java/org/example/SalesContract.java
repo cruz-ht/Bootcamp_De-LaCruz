@@ -1,8 +1,9 @@
 package org.example;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class SalesContract extends Contract{
+public class SalesContract extends Contract {
     //CONSTANTS for flat rate's, non changing values/fixed numbers
     private static final BigDecimal SALES_TAX_RATE = new BigDecimal("0.05");
     private static final BigDecimal RECORDING_FEE = new BigDecimal("100.00");
@@ -30,10 +31,9 @@ public class SalesContract extends Contract{
         this.salesTax = getVehicleSold().getPrice().multiply(SALES_TAX_RATE);
 
         //PROCESSING FEE W High & Low Fees
-        if(getVehicleSold().getPrice().compareTo(PRICE_THRESHOLD)< 0){
+        if (getVehicleSold().getPrice().compareTo(PRICE_THRESHOLD) < 0) {
             this.processingFee = LOW_PROCESSING_FEE;
-        }
-        else{
+        } else {
             this.processingFee = HIGH_PROCESSING_FEE;
         }
     }
@@ -41,6 +41,7 @@ public class SalesContract extends Contract{
     public BigDecimal getSalesTax() {
         return salesTax;
     }
+
     public void setSalesTax(BigDecimal salesTax) {
         this.salesTax = salesTax;
     }
@@ -48,6 +49,7 @@ public class SalesContract extends Contract{
     public BigDecimal getProcessingFee() {
         return processingFee;
     }
+
     public void setProcessingFee(BigDecimal processingFee) {
         this.processingFee = processingFee;
     }
@@ -55,6 +57,7 @@ public class SalesContract extends Contract{
     public BigDecimal getRecordingFee() {
         return recordingFee;
     }
+
     public void setRecordingFee(BigDecimal recordingFee) {
         this.recordingFee = recordingFee;
     }
@@ -62,10 +65,10 @@ public class SalesContract extends Contract{
     public boolean isFinance() {
         return finance;
     }
+
     public void setFinance(boolean finance) {
         this.finance = finance;
     }
-
 
 
     @Override
@@ -79,12 +82,12 @@ public class SalesContract extends Contract{
         int months;
         BigDecimal yearlyRate;
 
-        if(!finance){
+        if (!finance) {
             return BigDecimal.ZERO; //Built in 0 AKA no neew for "new Decimal..."
         }
 
         //ASSIGNING rate and months
-        if(getVehicleSold().getPrice().compareTo(PRICE_THRESHOLD)< 0){
+        if (getVehicleSold().getPrice().compareTo(PRICE_THRESHOLD) < 0) {
             months = LOW_LOAN_MONTHS;
             yearlyRate = LOW_RATE;
         } else {
@@ -93,10 +96,10 @@ public class SalesContract extends Contract{
         }
 
         // 2 scale is best for dollar amount but 10 is best while calculating aka leave 2 for final results if used
-        var monthlyRate = yearlyRate.divide(new BigDecimal("12"),10, RoundingMode.HALF_UP);
+        var monthlyRate = yearlyRate.divide(new BigDecimal("12"), 10, RoundingMode.HALF_UP);
         var growth = BigDecimal.ONE.add(monthlyRate).pow(months);
         //Full Equation
-        var payment = getTotalPrice().multiply(monthlyRate).multiply(growth).divide(growth.subtract(BigDecimal.ONE),2, RoundingMode.HALF_UP);
+        var payment = getTotalPrice().multiply(monthlyRate).multiply(growth).divide(growth.subtract(BigDecimal.ONE), 2, RoundingMode.HALF_UP);
 
         return payment;
     }

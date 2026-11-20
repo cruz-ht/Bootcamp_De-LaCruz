@@ -23,6 +23,7 @@ public class LeaseContract extends Contract {
     public BigDecimal getExpectedEndingVal() {
         return expectedEndingVal;
     }
+
     public void setExpectedEndingVal(BigDecimal expectedEndingVal) {
         this.expectedEndingVal = expectedEndingVal;
     }
@@ -30,6 +31,7 @@ public class LeaseContract extends Contract {
     public BigDecimal getLeaseFee() {
         return leaseFee;
     }
+
     public void setLeaseFee(BigDecimal leaseFee) {
         this.leaseFee = leaseFee;
     }
@@ -44,11 +46,10 @@ public class LeaseContract extends Contract {
     @Override
     public BigDecimal getMonthlyPayment() {
 
-        var monthlyRate = LEASE_INTEREST_RATE.divide(new BigDecimal("12"),10, RoundingMode.HALF_UP);
+        var monthlyRate = LEASE_INTEREST_RATE.divide(new BigDecimal("12"), 10, RoundingMode.HALF_UP);
         var growth = BigDecimal.ONE.add(monthlyRate).pow(LEASE_MONTHS);
 
-        var payment = getTotalPrice().multiply(monthlyRate).multiply(growth).divide(growth.subtract(BigDecimal.ONE),2,RoundingMode.HALF_UP);
+        var payment = getTotalPrice().multiply(monthlyRate).multiply(growth).divide(growth.subtract(BigDecimal.ONE), 2, RoundingMode.HALF_UP);
         return payment;
     }
-
 }
