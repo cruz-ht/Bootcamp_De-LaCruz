@@ -1,5 +1,6 @@
 package org.example;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class SalesContract extends Contract{
     //CONSTANTS for flat rate's, non changing values/fixed numbers
@@ -8,6 +9,14 @@ public class SalesContract extends Contract{
     private static final BigDecimal LOW_PROCESSING_FEE = new BigDecimal("295.00");
     private static final BigDecimal HIGH_PROCESSING_FEE = new BigDecimal("495.00");
     private static final BigDecimal PRICE_THRESHOLD = new BigDecimal("10000.00");
+
+
+    //CONSTS FOR getMonthlyPayment()
+    private static final BigDecimal HIGH_RATE = new BigDecimal("0.0425");
+    private static final BigDecimal LOW_RATE = new BigDecimal("0.0525");
+    private static final int HIGH_LOAN_MONTHS = 48;
+    private static final int LOW_LOAN_MONTHS = 24;
+
 
     private BigDecimal salesTax;
     private BigDecimal recordingFee;
@@ -61,11 +70,34 @@ public class SalesContract extends Contract{
 
     @Override
     public BigDecimal getTotalPrice() {
-        return null;
+        return getVehicleSold().getPrice().add(salesTax).add(recordingFee).add(processingFee);
     }
 
     @Override
     public BigDecimal getMonthlyPayment() {
-        return null;
+
+        int months;
+        BigDecimal yearlyRate;
+
+        if(!finance){
+            return BigDecimal.ZERO; //Built in 0 AKA no neew for "new Decimal..."
+        }
+
+        //ASSIGNING rate and months
+        if(getVehicleSold().getPrice().compareTo(PRICE_THRESHOLD)< 0){
+            months = LOW_LOAN_MONTHS;
+            yearlyRate = LOW_RATE;
+        } else {
+            months = HIGH_LOAN_MONTHS;
+            yearlyRate = HIGH_RATE;
+        }
+
+        // 2 scale is best for dollar amount but 10 is best while calculating aka leave 2 for final results if used
+        var monthlyRate = yearlyRate.divide(new BigDecimal("12"),10, RoundingMode.HALF_UP);
+        var growth = BigDecimal.ONE.add(monthlyRate).pow(months);
+        //Full Equation
+        var payment = getTotalPrice().multiply(monthlyRate).multiply(growth).divide(growth.subtract(BigDecimal.ONE),2, RoundingMode.HALF_UP);
+
+        return payment;
     }
 }
