@@ -56,8 +56,7 @@ public class DealershipFileManager {
 
             for (Vehicle vehicle : dealership.getAllVehicles()) {
                 String vehicleLine = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
-                        vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(),
-                        vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
+                        vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
 
                 bufferedWriter.newLine();
                 bufferedWriter.write(vehicleLine);
