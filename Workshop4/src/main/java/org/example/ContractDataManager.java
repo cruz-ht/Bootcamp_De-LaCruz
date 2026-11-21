@@ -20,7 +20,20 @@ public class ContractDataManager {
 
             if(contract instanceof SalesContract sales){
 
+                //revised format for boolean, displays Yes/No
                 String financeRevised;
+                if(sales.isFinance()){
+                    financeRevised = "Yes";
+
+                    String salesLine = "SALE |" + sharedLine + "|" + String.format("%.2f|%.2f|%.2f|%.2f|%s|%.2f", sales.getSalesTax(), sales.getRecordingFee(), sales.getProcessingFee(),sales.getTotalPrice(), financeRevised, sales.getMonthlyPayment());
+
+                    bufferedWriter.newLine();
+                    bufferedWriter.write(salesLine);
+                }
+                else{
+                    financeRevised = "No";
+                }
+
 
 
                 
