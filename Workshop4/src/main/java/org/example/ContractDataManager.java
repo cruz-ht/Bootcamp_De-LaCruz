@@ -29,13 +29,13 @@ public class ContractDataManager {
 
                 bufferedWriter.newLine();
                 bufferedWriter.write(salesLine);
-
             } else if (contract instanceof LeaseContract lease) {
 
+                String leaseLine = "LEASE|" + sharedLine + "|" + String.format("%.2f|%.2f|%.2f|%.2f", lease.getExpectedEndingVal(), lease.getLeaseFee(), lease.getTotalPrice(), lease.getMonthlyPayment());
 
+                bufferedWriter.newLine();
+                bufferedWriter.write(leaseLine);
             }
-
-
             bufferedWriter.close();
         } catch (IOException ex) {
             System.out.println("Could not save the file.");
