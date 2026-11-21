@@ -1,6 +1,8 @@
 package org.example;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,6 +32,7 @@ public class UserInterface {
             System.out.println("7 ᰔ View All Vehicles");
             System.out.println("8 ᰔ Add a Vehicle");
             System.out.println("9 ᰔ Remove a Vehicle");
+            System.out.println("10 ᰔ Sell or Lease a Vehicle");
             System.out.println("0 ᰔ Exit Showroom\n");
             System.out.println("Select a showroom option: ");
             option = scanner.nextLine().trim();
@@ -61,6 +64,9 @@ public class UserInterface {
                     break;
                 case "9":
                     processRemoveVehicleRequest();
+                    break;
+                case "10":
+                    processSellLeaseRequest();
                     break;
                 case "0":
                     System.out.println("Thanks for visiting Sugar Rush Motors. Until next time!");
@@ -244,7 +250,7 @@ public class UserInterface {
 
     public void processRemoveVehicleRequest() {
         System.out.println("\n\n Remove From The Collection");
-        System.out.println("Which ride are we taking out of the showroom?");
+        System.out.println("Which ride are we taking out of the showroom?\n");
         displayVehicles(dealership.getAllVehicles());
 
         int usersVehicleVin = loopForInt("\nEnter the vehicle VIN: ");
@@ -267,4 +273,74 @@ public class UserInterface {
             System.out.println("We couldn't find a vehicle with that VIN");
         }
     }
+
+    public void processSellLeaseRequest() {
+        System.out.println("\n\nLet's Make A Deal");
+        System.out.println("Looking to sell or lease? We'd love to work with you!\n");
+
+        //FIND VEHICLE
+        displayVehicles(dealership.getAllVehicles());
+        int usersVehicleVin = loopForInt("\nEnter the VIN of the vehicle: ");
+
+        Vehicle foundVehicle = null;
+        for (Vehicle vehicle : dealership.getAllVehicles()) {
+            if (vehicle.getVin() == usersVehicleVin) {
+                foundVehicle = vehicle;
+            }
+        }
+        if (foundVehicle == null) {
+            System.out.println("\nWe couldn't find a vehicle with that VIN.");
+            return;
+        }
+
+        //CUSTOMER INFO
+        System.out.println("Enter customer name: ");
+        var customerName = scanner.nextLine().trim();
+        System.out.println("Enter customer email: ");
+        var customerEmail = scanner.nextLine().trim();
+
+        var contractDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        //SALE OR LEASE
+        int vehicleAge = LocalDate.now().getYear() - foundVehicle.getYear();
+        String contractType = "";
+        while (!contractType.equals("sale") && !contractType.equals("lease")) {
+            System.out.println("\nIs this a sale or a lease? (sale/lease): ");
+            contractType = scanner.nextLine().trim().toLowerCase();
+
+            if (contractType.equals("lease") && vehicleAge > 3) {
+                System.out.println("\nSorry, vehicles over 3 years old can't be leased. Please choose sale.");
+                contractType = "";
+            } else if (!contractType.equals("sale") && !contractType.equals("lease")) {
+                System.out.println("\nPlease type sale or lease.");
+            }
+        }
+
+        //CREATE THE RIGHT CONTRACT
+        Contract contract;
+        if (contractType.equals("sale")) {
+            String financeAnswer = "";
+            while (!financeAnswer.equals("yes") && !financeAnswer.equals("no")) {
+                System.out.println("\nWould you like to finance? (yes/no): ");
+                financeAnswer = scanner.nextLine().trim().toLowerCase();
+            }
+            boolean finance = financeAnswer.equals("yes");
+            contract = new SalesContract(contractDate, customerName, customerEmail, foundVehicle, finance);
+        } else {
+            contract = new LeaseContract(contractDate, customerName, customerEmail, foundVehicle);
+        }
+        //SAVE
+        var contractManager = new ContractDataManager();
+        contractManager.saveContract(contract);
+
+        //REMOVE
+        dealership.removeVehicle(foundVehicle);
+        var fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+
+        System.out.printf("%nCongratulations, %s! Your contract is complete.%n", customerName);
+        System.out.printf("Total Price: $%.2f%n", contract.getTotalPrice());
+        System.out.printf("Monthly Payment: $%.2f%n", contract.getMonthlyPayment());
+    }
 }
+
